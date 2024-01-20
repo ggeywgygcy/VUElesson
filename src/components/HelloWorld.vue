@@ -1,6 +1,9 @@
 <template>
   <div class="hello">
     Кирилл работает
+    <button type="button" class="btn btn-secondary">Secondary</button>
+
+
   </div>
 </template>
 
