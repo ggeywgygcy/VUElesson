@@ -1,17 +1,19 @@
 <template>
   <div class="rows">
-    <form class="row g-3">
+    <slot>   </slot>
+
+    <div class="row g-3">
       <div class="col-auto">
         <label for="inputName" class="visually-hidden">nAME</label>
-        <input v-model="part" type="text" class="form-control" id="inputPassword2" placeholder="Название">
+        <input v-model="part.Pname" type="text" class="form-control" id="inputPassword2" placeholder="Название">
       </div>
       <div class="col-auto">
         <label for="inputPrace" class="visually-hidden">Цена за штуку</label>
-        <input v-model="price" type="text" class="form-control" id="inputPassword2" placeholder="Цена за шт">
+        <input v-model="part.PRace" type="text" class="form-control" id="inputPassword2" placeholder="Цена за шт">
       </div>
       <div class="col-auto">
         <label for="inputVolume" class="visually-hidden">Количество</label>
-        <input v-model="volume" type="text" class="form-control" id="inputPassword2" placeholder="Кол-во">
+        <input v-model="part.PVolume" type="text" class="form-control" id="inputPassword2" placeholder="Кол-во">
       </div>
       <div class="col-auto">
         <button v-on:click="added" class="btn btn-primary mb-3">Добавить</button>
@@ -19,6 +21,8 @@
       <div class="col-auto">
         <button v-on:click="show" class="btn btn-primary mb-3">Посмотреть результат</button>
       </div>
+
+      <slot>   </slot>
 
       <div v-if="true" class="row">
         <ul id="array-rendering">
@@ -28,18 +32,15 @@
       </ul>
       </div>
 
-      <div v-if="true" class="row">
-        <ul id="array-rendering">
-        <li v-for="item in test" :key="item" >
-        </li>
-      </ul>
-      </div>
-
-    </form>
-
+    </div>
+    <div class="alert alert-dark" role="alert">
+  У нас в корзине лежит товар весом больше 30ти киллограмитоод: {{resultSum}}
+</div>
 
   </div>
 </template>
+
+
 
 <script>
 /* eslint-disable */
@@ -52,25 +53,27 @@ export default {
   data(){
     return{
       product: [],
-      part : "",
-      volume : 0,
-      price  : 0,
-      check  : false,
-      test   :[1,2,3,4]
+      part : Product,
+      check  : false
     }
   },
   methods:{
     added(){
-      let p = new Product(this.part, this.price, this.volume);
-      this.product.push(p);
+      this.product.push({...this.part});
       
     }
   },
   show(){
-    this.check = true
-    alert(product[0].Pname)
+    this.check = !this.check
+  },
+  computed : {
+    resultSum(){
+     
+      return this.product.length;
+     }
+    }
   }
-}
+
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->

@@ -1,17 +1,22 @@
 <template>
   <div class="container">
-    <h1> Super Markt</h1>
-    <Card/>
+    
+    <Card>
+    <Header />
+    </Card>
   </div>
 </template>
 
 <script>
+/* eslint-disable */ 
 import Card from './components/Card.vue'
+import Header from './components/header.vue'
 
 export default {
   name: 'App',
   components: {
-    Card
+    Card,
+    Header
   }
 }
 </script>
